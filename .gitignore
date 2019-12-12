@@ -1,0 +1,14 @@
+.sass-cache
+.DS_Store
+*.sublime-workspace
+*.sublime-project
+*.log
+prova.*
+localconfiguration.js
+
+dist
+BCK
+bower_components
+node_modules
+deploy
+
