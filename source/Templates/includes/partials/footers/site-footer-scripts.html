@@ -1,0 +1,39 @@
+<script src="{{assets}}/Js/Vendor/jquery.min.js"></script>
+<script src="{{assets}}/Js/Vendor/parsley.min.js"></script>
+<script src="{{assets}}/Js/app.js"></script>
+
+<!-- cookies -->
+<script> $(window).bind("load", function(){MyCookieControl('cookie');}); </script> 
+<!-- js cookie -->
+<script>
+function CookieOnClick(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+    var elem = document.getElementById("cookie-alert");
+    if(elem) {
+        elem.parentElement.removeChild(elem);
+    }
+} 
+function MyCookieControl(cname) {
+    var elem = document.getElementById("cookie-alert");
+    if(elem) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        var done = false;
+        for(var i = 0; i < ca.length; i ++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) {
+                elem.parentElement.removeChild(elem);
+                done = true;
+                break;
+            }
+        }
+        if(!done) {
+            elem.style.display = 'block';
+        }
+    }
+}
+</script>

@@ -1,0 +1,30 @@
+@each $name, $font in $fonts-gotham {  
+    @font-face {
+        font-family: #{$font};
+        src:  url('#{$general-font-path}#{$font}.woff2') format('woff2'),
+              url('#{$general-font-path}#{$font}.woff') format('woff');
+    }  
+}
+
+//Fix scrollbar problem with IE11
+html {
+    -ms-overflow-style: scrollbar;
+}
+
+body{
+    @include font-theme($fonts-gotham,medium);
+}
+
+font {
+    color: inherit!important;
+}
+
+table {
+    width: 100%;
+}
+
+//Force img-responsive height even if I fix the image height!
+.img-fluid[style*="height"],
+.img-fluid[height] {
+    height: auto!important;
+}

@@ -1,0 +1,48 @@
+
+/*Logo header*/
+
+.header {  
+    @include rfs(map-safe-get($menu,font-size));
+    @include font-theme($fonts-gotham,light);    
+    transition: all 0.5s ease;
+}
+.header--scrolled{
+    background-color: $white;
+    color:$black;
+    transition: all .5s ease;
+}
+
+
+.header__logo-link{
+    position: relative;
+    height: map-safe-get($header,nav-logo-height);
+    width: map-safe-get($header,nav-logo-width); 
+    transition: transform .65s ease-in-out;
+    transform-style: preserve-3d;
+
+}
+
+.header__logo{
+    position: absolute;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    height: map-safe-get($header,nav-logo-height);
+    width: map-safe-get($header,nav-logo-width);    
+}
+
+
+.header--scrolled{
+    .header__logo-link{
+        transform: rotateX(180deg);
+    }
+    
+    .header__logo--black{
+        opacity:1;
+    }
+}
+
+
+.header__logo--black{
+    transform: rotateX(-180deg);
+    opacity:0;
+}

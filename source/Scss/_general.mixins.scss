@@ -1,0 +1,379 @@
+// ******************************************************************
+// *
+// * Functions
+// *
+// ******************************************************************
+/// Safely return a value from a map
+/// @param {Map} $map - Map to retrieve a value from.
+/// @param {String} $key - Name of the map key.
+
+@function map-safe-get($map, $key) {
+
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+  
+  @warn 'Key: `#{$key}` is not available in `#{$map}`';
+  @return null;
+}
+
+/// Finds a value in a nested map.
+/// @link https://css-tricks.com/snippets/sass/deep-getset-maps/ Deep Get/Set in Maps
+///
+/// @param {Map} $map - Map to pull a value from.
+/// @param {String} $keys... - Keys to use when looking for a value.
+/// @returns {Mixed} The value found in the map.
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+/// Finds a value in a nested map.
+/// @link https://css-tricks.com/snippets/sass/deep-getset-maps/ Deep Get/Set in Maps
+///
+/// @param {Map} $map - Map to pull a value from.
+/// @param {String} $keys... - Keys to use when looking for a value.
+/// @returns {Mixed} The value found in the map.
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+
+///Strips units from a value
+///
+/// @param {String} $num - value to be stripped.
+/// @returns {Unit} unitless value
+@function strip-unit($num) {
+    @return $num / ($num * 0 + 1);
+}
+
+
+
+// ******************************************************************
+// *
+// * Mixins
+// *
+// ******************************************************************
+
+
+/// Sets color of text and links
+/// @param {String} $color the color in hex
+/// @param {Bool} $underline if the links should be underlined or not.
+@mixin alternative-text-color($color,$underline:true){
+    color:$color;
+    a{
+      color:$color;
+      @if $underline == false {
+        text-decoration:none;
+      }
+
+      &:link, &:visited,&:hover,&:active{
+        color:$color;
+      }
+    }
+}
+
+
+/// Sets an Icon
+/// @param {String} $icon the icon file name in the folder "Assets/Sprites" without the .png extension
+/// @param {String} $position the position of the icon (before or after) 
+/// @param {String} $display can be block or inline-block (default)... or something else
+
+@mixin set-icon($icon,$position:after,$display:inline-block){
+  &:#{$position} { 
+    content:"";
+    display:$display;
+    background: resolve('#{$icon}.png') no-repeat 0 0;
+    @content;      
+  }
+}
+
+/// Builds a separator on top or bottom, could be padding or margin
+/// @param {String} $type - Type of separation: padding or margin
+/// @param {String} $direction - direction of the separation: top or bottom
+/// @param {String} $value amount of separation, it is halved
+
+@mixin spacer($type:padding,$direction:top,$value:map-safe-get($vertical-separations,standard)) {
+  @if $direction == top {
+
+    @if $type == padding {
+      @include padding-top(floor($value/2));
+    }
+
+    @else if $type = margin {
+      @include margin-top(floor($value/2));
+    }
+  } 
+
+  @else if $direction == bottom {
+
+    @if $type == padding {
+      @include padding-bottom(floor($value/2));
+    }
+
+    @else if $type = margin {
+      @include margin-bottom(floor($value/2));
+    }    
+  }   
+}
+
+
+
+
+
+
+//Building pure css carets
+/// @param {string} $direction: direction of the  caret: up, down, left, right
+/// @param {string} $position: before, after
+/// @param {Map} $options - Map values that overrides the default values set in the map $button-default-configuration.
+
+
+@mixin make-caret($direction,$position:after, $options: ()){
+    $configuration: map-merge($csscaret-default-configuration, $options);    
+  &:#{$position} { 
+    content:"";
+    display:inline-block;
+    border: solid map-safe-get($configuration,caret-color);
+    border-width: 0 map-safe-get($configuration,caret-width) map-safe-get($configuration,caret-width) 0;
+    padding: map-safe-get($configuration,caret-width);    
+    @content;
+
+    @if $direction == up {
+       transform: rotate(-135deg);
+    } 
+    
+    @else if $direction == right {
+        transform: rotate(-45deg);
+    } 
+    
+    @else if $direction == down {
+      transform: rotate(45deg);
+    } 
+    
+    @else if $direction == left {
+       transform: rotate(135deg);
+    } 
+    
+    @else {
+      @error "Unknown direction #{$direction}.";
+    }        
+  }
+}
+
+
+@mixin make-arrow($direction, $options: ()){
+    $configuration: map-merge($cssarrow-default-configuration, $options);    
+  &:#{map-safe-get($configuration,arrow-position)} { 
+    content:"";
+    width: 0; 
+    height: 0; 
+    display:inline-block;
+    @content;
+
+    @if $direction == up {   
+      border-left: map-safe-get($configuration,arrow-width) solid transparent;
+      border-right: map-safe-get($configuration,arrow-width) solid transparent;
+      border-bottom: map-safe-get($configuration,arrow-width) solid map-safe-get($configuration,arrow-color);    
+    } 
+    
+    @else if $direction == right {
+      border-top: map-safe-get($configuration,arrow-width) solid transparent;
+      border-bottom: map-safe-get($configuration,arrow-width) solid transparent;  
+      border-left: map-safe-get($configuration,arrow-width) solid map-safe-get($configuration,arrow-color);
+    } 
+    
+    @else if $direction == down {
+      border-left: map-safe-get($configuration,arrow-width) solid transparent;
+      border-right: map-safe-get($configuration,arrow-width) solid transparent; 
+      border-top: map-safe-get($configuration,arrow-width) solid map-safe-get($configuration,arrow-color);
+    } 
+    
+    @else if $direction == left {
+      border-top: map-safe-get($configuration,arrow-width) solid transparent;
+      border-bottom: map-safe-get($configuration,arrow-width) solid transparent;   
+      border-right:map-safe-get($configuration,arrow-width) solid map-safe-get($configuration,arrow-color);
+    } 
+    
+    @else {
+      @error "Unknown direction #{$direction}.";
+    }        
+  }
+}
+
+/// Build a button
+/// @param {Map} $options - Map values that overrides the default values set in the map $button-default-configuration.
+
+@mixin make-button($options: ()){    
+    $configuration: map-merge($button-default-configuration, $options);   
+    color: map-safe-get($configuration,button-color);
+    cursor:pointer;
+    transition:background .32s ease-in-out;
+    &:link, &:visited, &:hover, &:active{
+        color: map-safe-get($configuration,button-color);
+        text-decoration: none;
+    }
+    
+    &:hover{
+
+        @if map-safe-get($configuration,button-background) == transparent {
+              @if map-safe-get($configuration,button-hover-function) == darken {
+                  background:rgba($black,.3); 
+              
+              } @else {
+                 background:rgba($white,.3); 
+              }
+                                                                                   
+          } @else {
+           
+           @if map-safe-get($configuration,button-invert-hover) == true {
+                color: map-safe-get($configuration,button-background); 
+                background:map-safe-get($configuration,button-color);
+                       
+           
+           } @else {
+                
+              @if map-safe-get($configuration,button-hover-function) == darken {
+                  background:darken(map-safe-get($configuration,button-background),8%) ;
+              } @else {
+                  background:lighten(map-safe-get($configuration,button-background),8%) ;
+              }
+           }                
+        }
+    }
+    
+    @if map-safe-get($configuration,button-border) != transparent {
+        border: 2px solid map-safe-get($configuration,button-border);
+    }
+    
+    
+    padding: map-safe-get($configuration,button-padding);
+    background-color: map-safe-get($configuration,button-background);
+    letter-spacing: map-safe-get($configuration,button-letter-spacing);
+    @include rfs(map-safe-get($configuration,button-font-size));
+    display: inline-block;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+// Only display content to screen readers   (from BS 4)
+//
+// See: https://a11yproject.com/posts/how-to-hide-content/
+// See: https://hugogiraudel.com/2016/10/13/css-hide-and-seek/
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/// sets the style to make a background-image with absolute position behind an object
+@mixin position-bg(){
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position:absolute;
+  z-index:0;
+  width:100%;
+  height:100%;
+  top:0;  
+  left:0;
+}
+
+
+/// makes an image resposive with fixed aspect ratio
+/// @param {Unit} $percentage - the aspect ratio in %
+
+@mixin responsive-image-aspect-ratio($percentage: $percentage-responsive-image-aspect-ratio){  
+  display: block;
+  width: 100%;
+  position: relative;
+  height: 0;
+  padding: $percentage 0 0 0;
+  overflow: hidden;
+
+  img{
+    position: absolute;
+    max-width:100%;
+    height:auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    //immagine al top anzichè centrata verticalmente
+    //bottom: 0;
+    margin: auto;
+  }
+}
+
+
+/// @access public
+/// @param {String} $object - Name of the object to modify
+/// @param {String} $modifier - Name of the modifier, it wil be prepended with '--'
+/// Example usage
+///
+/// .menu{
+///    @include modifier(menu,footer){
+///        color:#fff; 
+///    }    
+///  }
+///
+/// CSS result:
+/// .menu.menu--footer{
+///    color:#fff;
+/// }
+
+@mixin modifier($object,$modifier){
+  &.#{$object}--#{$modifier} {
+    @content;   
+  }
+}
+
+/// @access public
+/// @param {String} $object - Name of the object to modify
+/// @param {String} $modifier - Name of the modifier, it wil be prepended with '--'
+@mixin child-modifier($object,$modifier){
+  .#{$object}--#{$modifier} & {
+    @content;
+  }
+}
+
+/// @access public
+/// @param {Unit} $font-size  - value of font-size in px
+/// @param {Unit} $line-height - value of line-height in px
+
+@mixin line-height($font-size,$line-height){
+    line-height: strip-unit($line-height / $font-size);    
+}
+
+
+/// @access public
+//returns the font from the font map, both function an mixin are required
+/// @param {Map} Map to retrieve the value from.
+
+
+@mixin font-theme ($font-map:$fonts-gotham,$key:"medium") {
+    font-family: map-safe-get($font-map,$key), "Helvetica","Helvetica Neue", "Segoe UI", Arial, "Noto Sans", sans-serif;
+}
+
+/// @access public
+/// @param {Unit} $value  - value of breakpoint in rem
+@mixin mbp($value:map-safe-get($grid-breakpoints,sm)){
+    @media screen and (min-width:#{$value}) {        
+        @content;
+      }
+}
+
+
+
+

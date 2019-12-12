@@ -1,0 +1,86 @@
+.banner{
+	//background:map-safe-get($banner--theme-default,background);
+	@include modifier(banner,theme-dark){
+		//background:map-safe-get($banner--theme-dark,background);
+	}
+}
+
+.row{
+	@include child-modifier(banner,fill-right){
+		justify-content: flex-end;
+	}
+}
+
+.banner__background{
+	
+	
+	@include responsive-image-aspect-ratio(41.66%);
+    @include mbp(map-safe-get($grid-breakpoints,sm)){
+    	@include rfs(600px,min-height); 
+    	@include position-bg; 
+    	padding:0;
+    	//opacity:.5;//just for debug
+    }
+
+
+}
+
+
+.banner__box{
+	
+	//set basic properties and dimensions
+	width:100%;	
+  	@include rfs(600px,min-height);
+	display: flex;
+	flex-direction: column;
+	//set background
+	background:map-safe-get($banner--theme-default,background);
+	@include child-modifier(banner,theme-dark){
+		background:map-safe-get($banner--theme-dark,background);
+		color: map-safe-get($banner--theme-dark,color);
+	}
+
+	//set widths
+	@include mbp(map-safe-get($grid-breakpoints,sm)){
+	  	flex: 0 0  span(5) + gutter();
+		margin-top:0;
+	}
+
+	//Set position
+	align-items: flex-end;
+	justify-content: center;
+	text-align: right;
+
+	//set inverted position 
+	@include child-modifier(banner,fill-right){
+		align-items:flex-start;
+		text-align:left;
+	}
+
+}
+
+
+.banner__content{
+	@include padding-left(100px);
+	@include padding-right(100px);
+}
+
+
+.banner__title{
+	@include rfs(map-safe-get($banner--theme-default,title-font-size));
+	@include font-theme($fonts-gotham,bold);
+	margin: 1rem 0;
+	line-height:initial;
+}
+
+.banner__button{
+	@include font-theme($fonts-gotham,light);
+	@include make-button($banner--theme-default);
+
+
+	@include child-modifier(banner,theme-dark){
+		@include make-button($banner--theme-dark);
+
+	}
+	margin:1rem 0;
+}

@@ -1,0 +1,36 @@
+// Make sure the charset is set appropriately
+@charset "UTF-8";    
+
+    @import "myvariables";
+    @import "normalize";
+    @import "scss";   
+    @import "susy";
+    @import "plugins/svg-grid";
+    @import "slick.scss";
+    @import "slick-theme.scss";
+    @import "fontawesome";
+    @import "solid";
+    @import "brands";
+  
+    @import "general.mixins";
+    @import "general.typography";
+    @import "components.grids";
+    @import "components.genericelements";
+    @import "components.header";
+    @import "components.mainmenu";
+
+    //Content elements
+    @import "components.carousel";   
+
+    // Cards
+    @import "components.card";
+
+
+    //Banners
+    @import "components.banner";
+
+    @import "components.form";
+
+    @import "components.footer";
+    @import "components.cookiealert";
+    @import "modifications.commonstyles";

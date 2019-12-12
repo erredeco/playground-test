@@ -1,0 +1,102 @@
+.menu--main{ 
+    display: flex;
+    justify-content:flex-end;
+    flex: 1;
+    overflow:hidden;
+}
+
+.menu__item{
+    @include child-modifier(menu,main){
+        @include alternative-text-color($white);
+        
+        //switch color
+        @include child-modifier(header,scrolled){
+            @include alternative-text-color($black);
+        }
+
+        text-align:center;
+        position:relative;
+        a {
+            @include padding(map-safe-get($menu,padding));
+            display: block;                
+            text-decoration: none;
+            &:hover{
+                text-decoration: underline;
+
+            }
+        }      
+      
+    }
+    
+    @include child-modifier(menu,hidden){
+        @include alternative-text-color($black);
+        a{
+            text-decoration: none;
+            &:hover{
+                text-decoration:underline;
+            }
+        
+        }    
+    }    
+}
+
+//Styles for priority navigation menu
+.navigation-main {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;      
+    button {
+        align-self: stretch;
+        transition: all .4s ease-out;    
+        padding:.5rem 0 .5rem  1rem;
+        outline: 0;
+        border: 0;      
+        background: $gray-light;
+        cursor:pointer;
+        margin-left: .5em;
+        &.hidden {
+            transition: none;
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        //style counter
+        &::after {
+            content: attr(count);
+            display: inline-flex;
+            width: 30px;
+            height: 30px;
+            align-items: center;
+            justify-content: center;
+            background: $gray-dark;
+            color: $white;
+            border-radius: 50%;
+            margin-left: .5rem;
+            margin-right: calc(-.5rem + -7px);
+        }  
+    } 
+}
+
+//Priority Submenu
+.menu--hidden {
+    position: absolute;
+    background: $white;
+    right: 0px;
+    top: 100%;
+    z-index:1;
+    li{
+        flex:none;
+        a {
+            display:block;
+        padding:1rem;
+        }    
+    }
+  
+    &.hidden {
+        display: none;
+        li {
+            padding: 1rem;
+        }
+    }
+}

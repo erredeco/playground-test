@@ -1,0 +1,85 @@
+.form{
+    @include rfs(map-safe-get($form,font-size));
+    @include mbp(map-safe-get($grid-breakpoints,xl)){
+        flex:0 0 span(8);
+    }
+}
+
+.form__info{
+    width:100%;
+    @include spacer(margin,bottom);
+    @include mbp(map-safe-get($grid-breakpoints,lg)){
+        flex: 0 0 span(4);
+    }    
+    @include mbp(map-safe-get($grid-breakpoints,xl)){
+        flex: 0 0 span(3 of 8);
+    }  
+}
+
+.form__controls{
+    width:100%;
+    @include spacer(margin,bottom);
+    @include mbp(map-safe-get($grid-breakpoints,lg)){
+        flex: 0 0 span(8);
+    }
+    @include mbp(map-safe-get($grid-breakpoints,xl)){
+        flex: 0 0 (span(5 of 8) - gutter());
+    }  
+}
+
+
+.form__item {
+    flex: 0 0 span(1 of 2);
+    margin-bottom: map-safe-get($form,margin-bottom);
+    @include modifier(form__item, wide){
+        width:100%;
+        flex: 1 1 auto;
+    }
+}
+
+.form__field{
+    background-color: transparent;
+    border:1px solid $white;
+    color: map-safe-get($form,input-color);
+    padding:map-safe-get($form,input-padding);
+
+    width: 100%;
+
+    &::placeholder{
+    color:rgba($white,.4);
+    }
+
+}
+
+.form__button{
+  @include make-button($form);
+  //border-style: none; //reset appearance
+  text-transform: uppercase;
+}
+
+.form__title{
+    @include rfs(map-safe-get($form,title-font-size));
+    @include font-theme($fonts-gotham,bold);
+    margin: 1rem 0;
+    line-height:initial;
+}
+
+
+//Parsley
+.parsley-errors-list{
+  list-style-type:none;
+
+  position:relative;  
+  &.filled{
+     transition:all .5s ease-in-out;
+     padding:.4em;
+
+     background:$gray-light;
+     color:$black;
+     @include make-arrow(up){
+        position:absolute;
+        top:-12px;
+        left:0;
+     }
+  }
+}

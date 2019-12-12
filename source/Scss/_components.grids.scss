@@ -1,0 +1,102 @@
+
+//Susy config defined here
+
+$susy: (
+    'svg-grid-colors': hsl(180, 50%, 80%),
+    'columns': susy-repeat(12),
+    'spread': 'narrow',
+    'container-spread': 'narrow'
+);
+
+
+$susy-small: (
+    'svg-grid-colors': hsl(180, 50%, 80%),
+    'columns': susy-repeat(6),
+    'spread': 'narrow',
+    'container-spread': 'narrow'
+);
+
+//just for debug
+/*
+.container {
+    background: susy-svg-grid() no-repeat scroll;
+}
+
+.container--narrow{
+    background: susy-svg-grid($susy-small) no-repeat scroll;
+
+}
+*/
+
+.container{
+    @include margin-left(1rem);
+    @include margin-right(1rem);
+    position:relative;
+}
+
+@each $grid-breakpoint,$value in $grid-breakpoints{
+    .container{
+        @include mbp($value){
+            max-width:$value;
+            margin-left:auto;
+            margin-right:auto; 
+        }
+    }
+}
+
+.container--narrow{
+    max-width: $min-width-narrow;
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;   
+}
+
+//It is a bit ugly, but it works
+@each $grid-breakpoint,$value in $grid-breakpoints{
+    .container--narrow{
+        @include mbp($value){
+            max-width:map-safe-get($max-widths--narrow,$value);
+            margin-left:auto;
+            margin-right:auto; 
+        }
+    }
+}
+
+.row{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    position:relative;
+
+    @include modifier(row,center){
+        justify-content:center;
+    }
+}
+
+.section-container{
+    position:relative;
+    overflow:hidden;
+    @include spacer(padding,top,140px);
+    @include spacer(padding,bottom,80px);
+    
+    @include modifier(section-container,theme-light) {
+        background-color:$gray-light; 
+    }      
+
+    @include modifier(section-container,theme-dark) {
+        background-color:$black;
+        @include alternative-text-color($white);
+    }  
+}
+
+// corrections to avoid duplication of margins
+.section-container--default+.section-container--default{
+    padding-top:0px!important;
+}
+.section-container--theme-light+.section-container--theme-light{
+    padding-top:0px!important;
+}
+
+.section-container--theme-dark+.section-container--theme-dark{
+    padding-top:0px!important;
+}

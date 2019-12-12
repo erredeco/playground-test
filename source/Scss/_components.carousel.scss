@@ -1,0 +1,73 @@
+//carousel (additional styles, the other are in _slick_theme.scss)
+
+
+.carousel-wrapper{
+    @include alternative-text-color(map-safe-get($carousel,color));
+    background: map-safe-get($carousel,background);
+}
+
+
+//Generic overrides for theme styles
+.slick-dotted.slick-slider{
+    margin-bottom:0;
+}
+
+//Arrows for sliders
+//@used in
+// _components.carousel.scss
+
+.slick-prev{
+    left:20px;
+    z-index:2;
+    @include set-icon(caret-left--slider--white,before); 
+}
+
+
+.slick-next{
+    right:20px;
+    z-index:2;
+    @include set-icon(caret-right--slider--white,before); 
+}
+
+.slick-dots{
+    z-index:2;
+    bottom:25px;
+}
+
+.carousel__item{
+    position:relative;
+    display:block!important;
+}
+
+
+//Carousel content
+.carousel__box{
+	@include mbp(map-safe-get($grid-breakpoints,md)){
+        width:span(3 wide);
+        left: span(2) + gutter();
+        position:absolute;
+        z-index:1;
+        top:50%;
+        transform:translate(0,-50%);
+        word-wrap:break-word;
+	}
+
+}
+
+.carousel__title{
+    @include rfs(map-safe-get($carousel,title-font-size));
+	@include font-theme($fonts-gotham,bold);
+	margin: 1rem 0;
+	line-height:initial;    
+}
+
+ 
+.slick-dots{
+    position:static;
+    padding-bottom:1rem;
+    @include mbp(map-safe-get($grid-breakpoints,md)){
+    position:absolute;
+    }
+}
+
+

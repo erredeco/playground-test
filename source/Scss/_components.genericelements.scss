@@ -1,0 +1,48 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,body{
+    line-height:$line-height;
+}
+
+//Copied from BS
+.img-fluid{
+    max-width:100%;
+    height:auto;
+    display:inline-block;
+}
+
+//Classes in common between all menus
+.menu{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+//class for sticky
+.sticky {
+    position: fixed!important;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom:auto!important;
+    margin-top:0!important;
+    z-index:3;
+}
+
+//Copied from BS
+.sr-only {
+  @include sr-only();
+}
+
+//Set the behavior for Responsive background images https://aclaes.com/responsive-background-images-with-srcset-and-sizes/
+[data-responsive-background-image] img {
+    @include mbp(map-safe-get($grid-breakpoints,sm)){
+        display: none;
+        height:0;
+        width:0;
+    }
+}

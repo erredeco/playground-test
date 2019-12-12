@@ -1,0 +1,41 @@
+.footer{
+    @include alternative-text-color(map-safe-get($footer,color)); 
+    @include rfs(map-safe-get($footer,font-size));
+    background: map-safe-get($footer,background);
+    @include padding-top(map-safe-get($footer,padding-top));
+    @include padding-bottom(map-safe-get($footer,padding-bottom));
+    border-top: 1px solid rgba($gray-medium,.5);
+
+    .row{       
+        flex-direction:column;
+        align-items:center;
+    }
+    //correction
+    .menu--main {
+        @include padding-top(20px);
+        .menu__item a{
+            @include padding(map-safe-get($footer,padding-menu));
+        }
+    }
+}
+
+.menu--social{
+    padding:0;
+    list-style-type:none;
+        .menu__item{
+            display:inline-block;
+            padding:15px;
+            vertical-align:middle;
+            a{
+                display:block;
+                color: rgba(map-safe-get($footer,color),.5); 
+            font-size: map-safe-get($footer,subfooter-icon-size);
+            }
+        }
+    }
+
+.sub-footer{
+    @include rfs(map-safe-get($footer,font-size--subfooter));
+    background: map-safe-get($footer,background--subfooter);   
+    padding:7px 0;  
+}  

@@ -1,0 +1,18 @@
+.cookie-alert {
+    left: 0;
+    min-width: 100%;
+    position: fixed;
+    text-align: center;
+    z-index: 1000;
+    bottom:0;
+}
+
+.cookie-text{
+    @include alternative-text-color($black);
+}
+    
+.button-cookie{
+    @include make-button($cookie-alert);
+    margin-left: 10px;
+}
+

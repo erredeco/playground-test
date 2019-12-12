@@ -1,0 +1,211 @@
+//add here all variables
+
+//Color palette:
+
+$black: #000;
+$white: #fff;
+$gray-light: #ebebeb;
+$gray-medium: #ccc;
+$gray-dark: #9f9f9f;
+
+//Grid system
+$grid-breakpoints: (
+    "sm": 48rem, //768px
+    "md": 62rem, //992px
+    "lg": 64rem, //1024px
+    "xl": 90rem //1440px
+);
+
+//I have to to this because I need a match with the values with $grid-breakpoints values
+$max-widths--narrow: (
+    48rem: 40rem, //600px
+    62rem: 48rem, //992px
+    64rem: 50rem, //800px
+    90rem: 71.25rem //1140px
+);
+
+$min-width-narrow:31.25rem; //500px
+
+//Typography
+$text-color: $black; //default text color
+$font-size-base:1rem;
+$font-size-smallest:12px;
+$font-size-smaller:14px;  
+$line-height:1.7;
+
+$general-font-path: "../Fonts/"; 
+$fa-font-path:"../Fonts"; //Override FontAwesome paths
+
+
+//all Gotham font weights:
+$fonts-gotham: (
+    "light":   GothamPro-Light,
+    "medium":  GothamPro,  
+    "bold":    GothamPro-Bold    
+);
+
+
+
+//Default style for buttons
+$button-default-configuration:(
+    "button-background": transparent,
+    "button-border": $black, 
+    "button-color": $black,           
+    "button-font-size": 16px,
+    "button-hover-function": darken,
+    "button-invert-hover": false,
+    "button-padding": 18px 40px,
+    "button-letter-spacing":1.8px
+);
+
+
+
+//default style for pure css carets
+$csscaret-default-configuration:(
+    "caret-color":$black,
+    "caret-width":3px
+);
+
+
+//default style for pure css arrows
+$cssarrow-default-configuration:(
+    "arrow-position":before,
+    "arrow-color":$gray-light,
+    "arrow-width":12px
+);
+
+
+//Other misc settings
+$default-content-padding:20px;
+$percentage-responsive-image-aspect-ratio:56.25%;
+
+//Slick Carousel Variables
+$slick-font-path: "../Fonts/";
+$slick-loader-path: "../Images/";
+$slick-dot-color:$white;                //override slick default
+$slick-dot-color-active: $white; //override slick default
+$slick-dot-size: 14px; //override slick default
+$slick-prev-character: ""; //override slick default
+$slick-next-character: ""; //override slick default
+
+//Maps for Styling the Elements:
+//Generic, default vertical margin between elements:
+$vertical-separations:(
+    "none":0, 
+    "minimal":20px,
+    "lesser":40px,
+    "standard":60px,
+    "maximum":100px
+);
+
+
+//Header area
+$header: (
+    "nav-logo-height": 22px,
+    "nav-logo-width":150px
+);
+
+
+//Main Menu
+$menu:(
+   "background": $white,
+   "color": $black,
+   "font-size":14px,
+   "padding":30px 0 30px 70px
+
+);
+
+//Contents
+
+//Header image
+
+
+$carousel:(
+    "font-size": 14px,
+    "title-font-size": 70px,
+    "background": $black,
+    "color": $white,
+);
+
+//card, general
+$card-general: (
+    "background":$white,
+    //"background":rgba(255,0,0,.5), //just for debug   
+    "content-padding": 50px,
+    "font-size":16px,
+    "image-aspect-ratio": 36.91%,
+    "title-color":$black, 
+    "button-background":$black,  //override $button-default-configuration
+    "button-border":transparent,  //override $button-default-configuration
+    "button-color": $white,  //override $button-default-configuration
+    "button-font-size":15px, //override $button-default-configuration
+    "button-invert-hover": true   //override $button-default-configuration            
+);
+
+
+//Banner, general
+
+$banner--theme-default:(
+    "background":$white, 
+    //"background":rgba(255,0,0,.5),  //just for debug
+    "title-font-size":70px,
+    "font-size":14px,
+    "button-background":$white,  //override $button-default-configuration 
+    "button-invert-hover": true //override $button-default-configuration
+);
+
+//Banner with dark theme
+
+$banner--theme-dark:(
+
+    "background":$black,
+    
+    //"background":rgba(255,0,0,.5),  //just for debug
+    "color":$white,
+    "button-background":$black,  //override $button-default-configuration 
+    "button-border": $white, //override $button-default-configuration
+    "button-color": $white,  //override $button-default-configuration
+    "button-invert-hover": true //override $button-default-configuration
+);
+
+
+
+//Form
+
+$form:(
+    "title-font-size":70px,
+    "font-size":14px,
+    "input-padding":10px,
+    "input-color":$white,
+    "margin-bottom": 16px,
+    "button-background":$white,  //override $button-default-configuration 
+    "button-border":$white,  //override $button-default-configuration    
+    "button-invert-hover": true, //override $button-default-configuration
+    "button-padding": 10px 50px //override $button-default-configuration
+);
+
+
+
+//Footer
+$footer:(
+    "background": $black,
+    "background--subfooter": $white,
+    "color":$white,  
+    "font-size": 13px, 
+    "font-size--subfooter": 12px,
+    "margin-top":30px,
+    "padding-bottom":60px, 
+    "padding-top":60px,   
+    "padding-menu":30px 35px 30px 35px,     
+    "subfooter-icon-size":18px,   
+);
+
+
+$cookie-alert:(
+    "button-background": $black,  //override $button-default-configuration
+    "button-border": transparent,  //override $button-default-configuration
+    "button-color": $white,  //override $button-default-configuration
+    "button-font-size":10px, //override $button-default-configuration
+    "button-invert-hover": true,   //override $button-default-configuration   
+    "button-padding": 5px 40px //override $button-default-configuration
+);

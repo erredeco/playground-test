@@ -1,0 +1,40 @@
+.card{  
+    @include spacer(margin,bottom);
+    @include mbp(map-safe-get($grid-breakpoints,sm)){
+        flex: 0 0  span(2,$susy-small);
+    }
+}
+
+.card__wrapper{
+    background:map-safe-get($card-general,background);
+    position: relative;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;  
+}
+
+.card__info{
+    @include padding(map-safe-get($card-general,content-padding));
+    flex:1 1 auto;  
+    text-align:center;
+}
+
+.card__title{
+    padding-top:map-safe-get($card-general,image-aspect-ratio);
+    background-position:center center;
+    margin:0;
+   //Same as '[data-responsive-background-image] img' but always
+    img{
+        display: none;
+        height:0;
+        width:0;   
+    }
+}
+
+
+.card__read-more-link{
+    @include make-button($card-general); 
+    @include font-theme($fonts-gotham,light);
+    display:block;
+}
